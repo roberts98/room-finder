@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import CustomCheckbox from './Checkbox';
 import { BuildingContext } from '../context/BuildingContext';
 
 function Sidebar() {
@@ -8,21 +12,54 @@ function Sidebar() {
     dispatch,
   } = useContext(BuildingContext);
 
+  function handleBuildingChange(e) {
+    const { checked, value } = e.target;
+
+    if (checked) {
+      dispatch({ type: 'SET_BUILDING_ID', payload: value });
+    } else {
+      dispatch({ type: 'REMOVE_BUILDING_ID', payload: value });
+    }
+  }
+
+  function handleFloorChange(e) {
+    const { checked, value } = e.target;
+    console.log(value);
+
+    if (checked) {
+      dispatch({ type: 'SET_FLOOR_ID', payload: value });
+    } else {
+      dispatch({ type: 'REMOVE_FLOOR_ID', payload: value });
+    }
+  }
+
   return (
     <div>
       <Typography variant="h4" component="h2">
         Select building and floor
       </Typography>
       {buildings.map((building) => (
-        <div key={building.name}>
-          <h3>{building.name}</h3>
+        <div key={building.id}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={building.id}
+                onChange={handleBuildingChange}
+                name="building"
+                color="primary"
+              />
+            }
+            label={building.name}
+          />
           {building.floors.map((floor) => (
-            <div
-              onClick={() => dispatch({ type: 'SET_FLOOR', payload: floor.id })}
-              key={floor.name}
+            <CustomCheckbox
+              value={floor.id}
+              onChange={handleFloorChange}
+              id={floor.id}
+              key={floor.id}
             >
               {floor.name}
-            </div>
+            </CustomCheckbox>
           ))}
         </div>
       ))}

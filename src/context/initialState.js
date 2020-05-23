@@ -2,7 +2,11 @@ import { v1 as uuid } from 'uuid';
 
 export const initialState = {
   rooms: [],
-  filters: {},
+  filters: {
+    search: null,
+    floorIds: [],
+    buildingIds: [],
+  },
   buildings: [
     {
       id: uuid(),
