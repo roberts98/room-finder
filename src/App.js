@@ -1,0 +1,33 @@
+import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+import Sidebar from './components/Sidebar';
+import Main from './components/Main';
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+  })
+);
+
+function App() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={3}>
+          <Sidebar />
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Main />
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
+
+export default App;
