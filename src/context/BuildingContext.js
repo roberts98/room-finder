@@ -21,16 +21,7 @@ function reducer(state, action) {
         ...state,
         filters: {
           ...state.filters,
-          floorIds: [...state.filters.floorIds, action.payload],
-        },
-      };
-
-    case 'REMOVE_FLOOR_ID':
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          floorIds: state.filters.floorIds.filter((id) => id !== action.payload),
+          floorId: action.payload,
         },
       };
 

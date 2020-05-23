@@ -3,12 +3,12 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import CustomCheckbox from './Checkbox';
+import Radio from './Radio';
 import { BuildingContext } from '../context/BuildingContext';
 
 function Sidebar() {
   const {
-    state: { buildings },
+    state: { buildings, filters },
     dispatch,
   } = useContext(BuildingContext);
 
@@ -22,15 +22,11 @@ function Sidebar() {
     }
   }
 
-  function handleFloorChange(e) {
-    const { checked, value } = e.target;
-    console.log(value);
+  function handleFloorChange(e, buildingId) {
+    const { value } = e.target;
 
-    if (checked) {
-      dispatch({ type: 'SET_FLOOR_ID', payload: value });
-    } else {
-      dispatch({ type: 'REMOVE_FLOOR_ID', payload: value });
-    }
+    dispatch({ type: 'SET_FLOOR_ID', payload: value });
+    dispatch({ type: 'SET_BUILDING_ID', payload: buildingId });
   }
 
   return (
@@ -43,6 +39,7 @@ function Sidebar() {
           <FormControlLabel
             control={
               <Checkbox
+                checked={filters.buildingIds.includes(building.id)}
                 value={building.id}
                 onChange={handleBuildingChange}
                 name="building"
@@ -52,14 +49,14 @@ function Sidebar() {
             label={building.name}
           />
           {building.floors.map((floor) => (
-            <CustomCheckbox
+            <Radio
               value={floor.id}
-              onChange={handleFloorChange}
+              onChange={(e) => handleFloorChange(e, building.id)}
               id={floor.id}
               key={floor.id}
             >
               {floor.name}
-            </CustomCheckbox>
+            </Radio>
           ))}
         </div>
       ))}

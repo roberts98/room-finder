@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Sidebar from './components/Sidebar';
 import Main from './components/Main';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -17,16 +18,18 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-          <Sidebar />
+    <Container maxWidth="xl">
+      <div className={classes.root}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={3}>
+            <Sidebar />
+          </Grid>
+          <Grid item xs={12} md={9}>
+            <Main />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={9}>
-          <Main />
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </Container>
   );
 }
 

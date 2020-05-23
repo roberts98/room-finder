@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import RoomItem from './RoomItem';
 import { BuildingContext } from '../context/BuildingContext';
 import { getVisibleRooms } from '../context/selectors';
+
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
@@ -20,16 +22,13 @@ function RoomsList() {
   const { state } = useContext(BuildingContext);
   const classes = useStyles();
   const rooms = getVisibleRooms(state.buildings, state.filters);
-  console.log(state.filters);
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {rooms.map((room) => (
-          <Grid key={room.text} item xs={12} md={4}>
-            <h1 key={room.text}>{room.text}</h1>
-            <img className={classes.image} src={room.image} alt={room.text} />
-            {room.floorId}
+          <Grid key={room.id} item xs={12} md={4}>
+            <RoomItem room={room} />
           </Grid>
         ))}
       </Grid>
