@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/room-finder/static/js/main.65158ac0.chunk.js",
+    "main.js.map": "/room-finder/static/js/main.65158ac0.chunk.js.map",
+    "runtime-main.js": "/room-finder/static/js/runtime-main.ff6ec995.js",
+    "runtime-main.js.map": "/room-finder/static/js/runtime-main.ff6ec995.js.map",
+    "static/js/2.5cea2736.chunk.js": "/room-finder/static/js/2.5cea2736.chunk.js",
+    "static/js/2.5cea2736.chunk.js.map": "/room-finder/static/js/2.5cea2736.chunk.js.map",
+    "index.html": "/room-finder/index.html",
+    "precache-manifest.a6e991c6a2b1ef3a560f132b01ff442b.js": "/room-finder/precache-manifest.a6e991c6a2b1ef3a560f132b01ff442b.js",
+    "service-worker.js": "/room-finder/service-worker.js",
+    "static/js/2.5cea2736.chunk.js.LICENSE.txt": "/room-finder/static/js/2.5cea2736.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff6ec995.js",
+    "static/js/2.5cea2736.chunk.js",
+    "static/js/main.65158ac0.chunk.js"
+  ]
+}
