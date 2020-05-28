@@ -4,7 +4,7 @@ export const initialState = {
   rooms: [],
   filters: {
     search: null,
-    floorId: null,
+    floorIds: [],
     buildingIds: [],
   },
   buildings: [

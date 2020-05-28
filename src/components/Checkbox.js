@@ -28,16 +28,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Checkbox({ children, id, onChange, value }) {
+function Checkbox({ children, id, onChange, value, checked }) {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
       <input
+        checked={checked}
         value={value}
-        name="radio"
+        name="floor"
         onChange={onChange}
         id={id}
-        type="radio"
+        type="checkbox"
         className={classes.input}
       />
       <label htmlFor={id} className={classes.label}>

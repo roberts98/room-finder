@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import Radio from './Radio';
+import CustomCheckbox from './Checkbox';
 import { BuildingContext } from '../context/BuildingContext';
 
 function Sidebar() {
@@ -23,10 +23,14 @@ function Sidebar() {
   }
 
   function handleFloorChange(e, buildingId) {
-    const { value } = e.target;
+    const { value, checked } = e.target;
 
-    dispatch({ type: 'SET_FLOOR_ID', payload: value });
-    dispatch({ type: 'SET_BUILDING_ID', payload: buildingId });
+    if (checked) {
+      dispatch({ type: 'SET_FLOOR_ID', payload: value });
+      dispatch({ type: 'SET_BUILDING_ID', payload: { id: buildingId, onlyOne: true } });
+    } else {
+      dispatch({ type: 'REMOVE_FLOOR_ID', payload: { floorId: value, buildingId } });
+    }
   }
 
   return (
@@ -49,14 +53,15 @@ function Sidebar() {
             label={building.name}
           />
           {building.floors.map((floor) => (
-            <Radio
+            <CustomCheckbox
               value={floor.id}
               onChange={(e) => handleFloorChange(e, building.id)}
               id={floor.id}
               key={floor.id}
+              checked={filters.floorIds.includes(floor.id)}
             >
               {floor.name}
-            </Radio>
+            </CustomCheckbox>
           ))}
         </div>
       ))}

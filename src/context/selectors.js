@@ -1,4 +1,4 @@
-export function getVisibleRooms(buildings, { search, floorId, buildingIds }) {
+export function getVisibleRooms(buildings, { search, floorIds, buildingIds }) {
   const rooms = buildings
     .map((building) =>
       building.floors.map((floor) =>
@@ -16,7 +16,7 @@ export function getVisibleRooms(buildings, { search, floorId, buildingIds }) {
     .filter((room) => {
       const searchMatch =
         search !== null ? room.filterText.toLowerCase().includes(search.toLowerCase()) : true;
-      const floorMatch = floorId ? floorId === room.floorId : true;
+      const floorMatch = floorIds.length ? floorIds.includes(room.floorId) : true;
       const buildingMatch = buildingIds.length ? buildingIds.includes(room.buildingId) : true;
 
       return searchMatch && floorMatch && buildingMatch;
