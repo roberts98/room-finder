@@ -5,6 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import BuildingProvider from './context/BuildingContext';
 
+/**
+ * React method which needs the JSX and the element ID to render the application.
+ * We wrap the App with Provider so the app can use data from Provider.
+ */
 ReactDOM.render(
   <React.StrictMode>
     <BuildingProvider>

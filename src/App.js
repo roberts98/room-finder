@@ -14,6 +14,9 @@ const useStyles = makeStyles(() =>
   })
 );
 
+/**
+ * Main view, it breaks the page to 2 parts, sidebar and main items.
+ */
 function App() {
   const classes = useStyles();
 

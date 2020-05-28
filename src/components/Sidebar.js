@@ -6,15 +6,31 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CustomCheckbox from './Checkbox';
 import { BuildingContext } from '../context/BuildingContext';
 
+/**
+ * Component which is responsible for almost the entire logic in the application.
+ * It returns all the checkboxes. Has change handlers for them.
+ */
 function Sidebar() {
+  /**
+   * Get all the buildings and filters from the global state and dispatch, to have ability to change the state.
+   */
   const {
     state: { buildings, filters },
     dispatch,
   } = useContext(BuildingContext);
 
+  /**
+   * Change handler which is triggered when the building is selected or unselected.
+   */
   function handleBuildingChange(e) {
+    /**
+     * Destructuring the e.target object and getting the value and info if it's checked or not.
+     */
     const { checked, value } = e.target;
 
+    /**
+     * If the building is checked we dispatch an action which add another building to global state, if not we remove it.
+     */
     if (checked) {
       dispatch({ type: 'SET_BUILDING_ID', payload: value });
     } else {
@@ -22,12 +38,21 @@ function Sidebar() {
     }
   }
 
+  /**
+   * Basically the same logic as in handleBuildingChange, but here in addition when we select the floor we also want to check the building.
+   */
   function handleFloorChange(e, buildingId) {
     const { value, checked } = e.target;
 
+    /**
+     * Setting or removing the floor id in the global state.
+     */
     if (checked) {
       dispatch({ type: 'SET_FLOOR_ID', payload: value });
-      dispatch({ type: 'SET_BUILDING_ID', payload: { id: buildingId, onlyOne: true } });
+      /**
+       * Based on the fromFloor flag I know in context's reducer that the change comes from the handleFloorChange, not the handleBuildingChange
+       */
+      dispatch({ type: 'SET_BUILDING_ID', payload: { id: buildingId, fromFloor: true } });
     } else {
       dispatch({ type: 'REMOVE_FLOOR_ID', payload: { floorId: value, buildingId } });
     }

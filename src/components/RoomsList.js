@@ -18,11 +18,24 @@ const useStyles = makeStyles(() =>
   })
 );
 
+/**
+ * Component which renders the list of rooms, it gets the data from context, and uses getVisibleRooms selector to render correct rooms considering the filters.
+ */
 function RoomsList() {
+  /**
+   * useContext is built-in react hook, it returns an object specified in provider. In this case it's object with state and dispatch.
+   */
   const { state } = useContext(BuildingContext);
   const classes = useStyles();
+
+  /**
+   * Returns the rooms, it gets all buildings as a first parameter and filters as a second one.
+   */
   const rooms = getVisibleRooms(state.buildings, state.filters);
 
+  /**
+   * Uses material ui core grid system to display rooms in grid.
+   */
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>

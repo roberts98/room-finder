@@ -2,10 +2,21 @@ import React, { createContext, useReducer } from 'react';
 
 import { initialState } from './initialState';
 
+/**
+ * Using built-in React function which creates Context. Then we can use the provider, to provide the data to all components using useContext hook.
+ */
 export const BuildingContext = createContext();
 
+/**
+ * Reducer function which takes 2 arguments, state and action.
+ * Based on action.type we do some changes in the state.
+ * We always return a new object as Context should be immutable.
+ */
 function reducer(state, action) {
   switch (action.type) {
+    /**
+     * Set new search phrase.
+     */
     case 'SET_SEARCH':
       return {
         ...state,
@@ -15,6 +26,9 @@ function reducer(state, action) {
         },
       };
 
+    /**
+     * Set new floor id.
+     */
     case 'SET_FLOOR_ID':
       return {
         ...state,
@@ -24,7 +38,15 @@ function reducer(state, action) {
         },
       };
 
+    /**
+     * Remove floor id
+     */
     case 'REMOVE_FLOOR_ID':
+      /**
+       * newFloors is the array of new floorIds.
+       * buildingFloors is the array of floors for given building.
+       * hasAny is a boolean variable which returns true, if there's more than one active floor for given building, otherwise it returns false.
+       */
       const buildingFloors = state.buildings
         .filter((building) => building.id === action.payload.buildingId)[0]
         .floors.map((floor) => floor.id);
@@ -42,8 +64,14 @@ function reducer(state, action) {
         },
       };
 
+    /**
+     * Set new building ID.
+     */
     case 'SET_BUILDING_ID':
-      if (action.payload.onlyOne) {
+      /**
+       * If the action comes from the handleFloorChange we only update the building ID.
+       */
+      if (action.payload.fromFloor) {
         return {
           ...state,
           filters: {
@@ -53,6 +81,9 @@ function reducer(state, action) {
         };
       }
 
+      /**
+       * Otherwise we also select all the floors for given building.
+       */
       const floorIds = state.buildings
         .filter((building) => building.id === action.payload)[0]
         .floors.map((floor) => floor.id);
@@ -66,6 +97,10 @@ function reducer(state, action) {
         },
       };
 
+    /**
+     * Removing the building ID.
+     * When we remove the building from filters, we also want to remove all floors associated with it.
+     */
     case 'REMOVE_BUILDING_ID':
       const floorIdsToRemove = state.buildings
         .filter((building) => building.id === action.payload)[0]
@@ -85,7 +120,14 @@ function reducer(state, action) {
   }
 }
 
+/**
+ * Provider which provides the state and dispatch function for components.
+ * It wraps the entire application so each components can use it.
+ */
 function BuildingProvider({ children }) {
+  /**
+   * built-in React hook, which returns a 2 element array, state and dispatch
+   */
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <BuildingContext.Provider value={{ state, dispatch }}>{children}</BuildingContext.Provider>

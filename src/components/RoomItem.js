@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Chip } from '@material-ui/core';
 
+/**
+ * Allows to create custom styles, part of material UI core.
+ */
 const useStyles = makeStyles({
   media: {
     height: 200,
@@ -22,7 +25,13 @@ const useStyles = makeStyles({
   },
 });
 
+/**
+ * Component which renders the single Room Item. It has the entire room object as a prop, it uses it to render the actual data. All Cards components come from material ui core
+ */
 function RoomItem({ room }) {
+  /**
+   * Custom hook which returns objects with CSS classes and styles.
+   */
   const classes = useStyles();
 
   return (

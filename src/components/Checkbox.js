@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
+/**
+ * Function provided by the material ui-core which allows to make hook for creating custom styles.
+ */
 const useStyles = makeStyles(() => ({
   wrapper: {
     marginBottom: 10,
@@ -28,6 +31,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ * Component which receives props such as onChange, checked, value, id from the Sidebar Component, as children input's label is passed.
+ */
 function Checkbox({ children, id, onChange, value, checked }) {
   const classes = useStyles();
   return (

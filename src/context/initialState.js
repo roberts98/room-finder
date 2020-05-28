@@ -1,5 +1,8 @@
 import { v1 as uuid } from 'uuid';
 
+/**
+ * Initial state which contains the dummy data and initial filters.
+ */
 export const initialState = {
   rooms: [],
   filters: {
